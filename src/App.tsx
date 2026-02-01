@@ -1,25 +1,32 @@
 
 import './App.css'
+import HireOperatorButton from './components/HireOperatorButton/HireOperatorButton';
 import MainEarningButton from './components/MainEarningButton/MainEarningButton';
 import SkillUpgradeButton from './components/SkillUpgradeButton/SkillUpgradeButton';
 import useGameLogic from './hooks/useGameLogic'
+import usePassiveIncome from './hooks/usePassiveIncome';
+import countPrettier from './UI/UICountFormatter';
 
 function App() {
 
   const {
     money,
     clickForce,
-    cost,
+    upgradeCost,
     addMoneyForCall,
     increaceClickForce,
     spendMoney,
-    increaseCost
+    increaseUpgradeCost,
+    hireOperator,
+    operatorsValue,
+    setMoney,
+    pasIncome,
   } = useGameLogic();
-  
+  usePassiveIncome(setMoney, pasIncome);
   return (
     <>
      
-      <h1>Money: {money}$</h1>
+      <h1>Money: ${countPrettier(money)}</h1>
       <div className="card">
         <MainEarningButton
         addMoneyForCall={()=>addMoneyForCall()}
@@ -28,15 +35,23 @@ function App() {
         </MainEarningButton>
 
         <SkillUpgradeButton
-          increaceClickForce = {() => increaceClickForce()} 
-          spendMoney = {() => spendMoney()}
-          increaseCost = {() => increaseCost()} 
-          disableCondition = {money<cost}
+          increaseClickForce = {() => increaceClickForce()} 
+          spendMoney = {() => spendMoney(upgradeCost)}
+          increaseCost = {() => increaseUpgradeCost()} 
+          disableCondition = {money<upgradeCost}
         >
           Upgrade Skills
         </SkillUpgradeButton>
 
-         <span>Cost: {cost}$ </span>
+        <HireOperatorButton
+        hireOperator={() => hireOperator()}
+        spendMoney={() => spendMoney(10)}
+        disableCondition={operatorsValue>=5 || money<10}
+        >
+          Hire a new operator
+        </HireOperatorButton>
+
+         <span>Cost: {upgradeCost}$ </span>
         <p> You earning to call: {clickForce}$</p>
       </div>
     </>

@@ -1,11 +1,11 @@
 import type { ISkillUpgradeButton } from "../../types"
 
 export default function SkillUpgradeButton(
-    {increaceClickForce, spendMoney, increaseCost, disableCondition, children}: ISkillUpgradeButton
+    {increaseClickForce, spendMoney, increaseCost, disableCondition, children}: ISkillUpgradeButton
 ) {
     return (
     <button onClick={() => {
-          increaceClickForce(),
+          increaseClickForce(),
           spendMoney(),
           increaseCost()
         }}

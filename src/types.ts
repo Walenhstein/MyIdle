@@ -3,10 +3,17 @@ export interface IMainEarningButton {
     children: string;
 }
 
-export interface ISkillUpgradeButton {
-    increaceClickForce: () => void;
+interface IBasedButton {
     spendMoney: () => void;
-    increaseCost: () => void;
     disableCondition: boolean;
     children: string;
+}
+
+export interface ISkillUpgradeButton extends IBasedButton {
+    increaseClickForce: () => void;
+    increaseCost: () => void;
+}
+
+export interface IHireOperatorButton extends IBasedButton {
+    hireOperator: () => void;
 }
