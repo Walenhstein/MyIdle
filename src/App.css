@@ -11,4 +11,18 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 70vw;
+  box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2.5em;
+    display: inline-block;
+    width: 100%;
+  }
 }
